@@ -1,0 +1,21 @@
+.paddingTop {
+    padding-top: 20px;
+}
+
+.card {
+    min-width: 50px;
+}
+
+.underline-none {
+    text-decoration: none;
+}
+
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
