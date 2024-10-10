@@ -5,4 +5,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('tests', views.TestsView.as_view(), name='tests'),
     path('test/<int:test_id>', views.TestView.as_view(), name='test'),
+    path('new-tests', views.NewTests.as_view(), name='new-tests'),
+    path('user', views.UserView.as_view(), name='user')
 ]
