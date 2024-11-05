@@ -1,14 +1,13 @@
-import datetime
+from datetime import datetime
 from django.http import HttpResponse
-from rest_framework import permissions, status
+from requests import Response
+from rest_framework import status, permissions
 from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication
+
 
 # Create your views here.
 def index(request):
     return HttpResponse("This is api for test web")
-
 
 class TestsView(APIView):
     permission_classes = (permissions.AllowAny,)
