@@ -34,7 +34,6 @@ CORS_ORIGIN_ALLOW_ALL = DEBUG
 INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
-    'tests.apps.TestsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

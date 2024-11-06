@@ -7,6 +7,8 @@ import {NewTest} from "./pages/NewTest.tsx";
 import {Header} from "./components/Header.tsx";
 import {Profile} from "./pages/Profile.tsx";
 import {ProviderUser} from "./utils/providers/UserProvider.tsx";
+import {SignIn} from "./pages/SignIn.tsx";
+import {Register} from "./pages/Register.tsx";
 
 function App() {
 
@@ -18,7 +20,11 @@ function App() {
                   <Route path="/" element={<Index />} />
                   <Route path="/tests" element={<Tests />} />
                   <Route path="/test/:id" element={<Test />} />
-                  <Route path="/new_test/:id" element={<NewTest />} />
+                  <Route path="/test/new_test/:id" element={<NewTest />} />
+                  <Route path="/question/:id" element={<p>Question</p>} />
+                  <Route path="/new_question" element={<p>New quesion</p>} />
+                  <Route path="/login" element={<SignIn />} />
+                  <Route path="/register" element={<Register />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="*" element={<NoPage />} />
               </Routes>
