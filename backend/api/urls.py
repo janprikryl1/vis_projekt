@@ -7,10 +7,8 @@ urlpatterns = [
     path('login', views.LoginView.as_view(), name='login'),
     path('is-authenticated', views.IsAuthenticatedView.as_view(), name='is-authenticated'),
     path('latest-tests', views.LatestTestsView.as_view(), name='latest-tests'),
-
-
     path('tests', views.TestsView.as_view(), name='tests'),
+    path('new_test', views.NewTest.as_view(), name='new-test'),
     path('test/<int:test_id>', views.TestView.as_view(), name='test'),
-    path('new-tests', views.NewTests.as_view(), name='new-tests'),
-    path('user', views.UserView.as_view(), name='user')
+
 ]

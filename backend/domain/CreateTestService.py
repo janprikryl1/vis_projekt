@@ -1,25 +1,25 @@
-from data.TestData import get_filled_tests_for_student, get_created_tests_for_teacher
 from data.ProfileData import get_user_info_by_token
+from data.DBConnection import get_db_connection
 
-class LatestTests:
+class CreateTestService:
     def __init__(self, auth_header):
         if not auth_header or not auth_header.startswith("Bearer "):
             self.error = 'Authorization token not provided'
+            return
 
         token = auth_header.split(" ")[1]
 
         user_data = get_user_info_by_token(token)
         if not user_data:
             self.error = 'Invalid token'
+            return
 
         self.user_id = user_data['user_id']
         self.user_type = user_data['user_type']
         self.error = None
 
-    def get_latest_tests(self):
-        if self.user_type == "P":
-            return get_filled_tests_for_student(self.user_id)
-        elif self.user_type == "T":
-            return get_created_tests_for_teacher(self.user_id)
-        else:
-            return []
+    def is_teacher(self):
+        return self.user_type == "T"
+
+    def save(self, title, description, subject, sequence, max_time):
+        return save_test(self, title, description, subject, sequence, max_time)
