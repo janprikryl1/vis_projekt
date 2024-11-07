@@ -1,10 +1,13 @@
 import {FC, useEffect, useState} from "react";
-import {getAllTest} from "../api/testService.ts";
 import {TestCard} from "../components/TestCard.tsx";
 import {TestCardSkeleton} from "../components/TestCardSkeleton.tsx";
 import {NewTestType} from "../utils/types/NewTestType.ts";
+import {getAllTest} from "../api/testService.tsx";
+import {useUserContext} from "../utils/providers/UserProvider.tsx";
+import {Link} from "react-router-dom";
 
 export const Tests:FC = () => {
+    const {user} = useUserContext();
     const [tests, setTests] = useState<NewTestType[]>();
 
     useEffect(() => {
@@ -19,18 +22,18 @@ export const Tests:FC = () => {
         getTests();
     }, []);
 
-
-
     return (
         <div className="container">
             <h1>Testy</h1>
+            {user && user.user_type === "Teacher" && <Link to="/new_test">Přidat test</Link>}
             <div className="row">
-            {tests && tests.length > 0 ? (
-                tests.map((test, index) => (
-                    <TestCard key={index} test={test} />
-                ))
-            ) : Array.from({ length: 9 }).map((_, index) => (
+            {tests === undefined ?
+                Array.from({ length: 9 }).map((_, index) => (
                 <TestCardSkeleton key={index} />
+            )) : tests.length === 0 ? (
+                    <p>Žádné testy</p>
+            ) : tests.map((test, index) => (
+                    <TestCard key={index} test={test} />
             ))}
             </div>
         </div>

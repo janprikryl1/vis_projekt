@@ -2,7 +2,7 @@
 
 -- Tabulka správné řešení
 CREATE TABLE Correct_solution (
-     correct_solution_id INTEGER PRIMARY KEY AUTOINCREMENT,
+     correct_solution_id VARCHAR(20) PRIMARY KEY,
      correct_solution_text VARCHAR(100) NOT NULL,
      case_sensitive BOOLEAN NOT NULL DEFAULT 0,
      question_id INTEGER NOT NULL,

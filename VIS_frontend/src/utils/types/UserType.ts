@@ -3,5 +3,5 @@ export type UserType = {
     name: string;
     surname: string;
     email: string;
-    user_type: "student" | "teacher" | "admin",
+    user_type: "Pupil" | "Teacher" | "Admin",
 }

@@ -16,6 +16,9 @@ class TestsService:
         if self.user_type == "P":
             return get_filled_tests_for_student(self.user_id)
         elif self.user_type == "T":
-            return get_created_tests_for_teacher(self.user_id)
+            test = get_created_tests_for_teacher(self.user_id)
+            if test.user_id == self.user_id:
+                return test
+            return []
         else:
             return []

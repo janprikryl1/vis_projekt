@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {TestType} from "../utils/types/TestType.ts";
-import {getTest} from "../api/testService.ts";
 import {TestSkeleton} from "../components/TestSkeleton.tsx";
 import {toCzechDateFormat} from "../utils/constants";
+import {getTest} from "../api/testService.tsx";
 
 export const Test:FC = () => {
     const {id} = useParams();
@@ -29,7 +29,7 @@ export const Test:FC = () => {
                     <div className="container" style={{marginTop: 20}}>
                         <div className="row">
                             <div className="col-sm-8">
-                                <h1>{test.test.title}</h1>
+                                <h1>{test.test.test_title}</h1>
                                 <h2>{test.test.subject}</h2>
                                 <h3 style={{whiteSpace: "pre-line"}}>{test.test.description}</h3>
                                 <p>Test {test.test.sequence ? "je skevenční" : "není sekvenční"}</p>

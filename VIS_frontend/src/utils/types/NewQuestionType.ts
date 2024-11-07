@@ -1,8 +1,10 @@
+import {CorrectSolutionType} from "./CorrectSolutionType.ts";
+
 export type NewQuestionType = {
-    id: number;
+    id: string;
     title: string;
     description: string;
     task: string;
-    corrects: []
+    corrects: CorrectSolutionType[];
     show_correct: boolean;
 }
