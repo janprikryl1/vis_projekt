@@ -5,7 +5,7 @@ CREATE TABLE Correct_solution (
      correct_solution_id VARCHAR(20) PRIMARY KEY,
      correct_solution_text VARCHAR(100) NOT NULL,
      case_sensitive BOOLEAN NOT NULL DEFAULT 0,
-     question_id INTEGER NOT NULL,
+     question_id VARCHAR(20) NOT NULL,
      FOREIGN KEY (question_id) REFERENCES Question (question_id)
          ON DELETE NO ACTION
          ON UPDATE NO ACTION
@@ -13,11 +13,11 @@ CREATE TABLE Correct_solution (
 
 -- Tabulka vyplněná otázka
 CREATE TABLE Filled_question (
+     filled_question_id INTEGER PRIMARY KEY AUTOINCREMENT,
      question_id INTEGER,
      solution VARCHAR(100),
      is_correct BOOLEAN NOT NULL DEFAULT 0,
      filled_test_id INTEGER,
-     PRIMARY KEY (question_id, filled_test_id),
      FOREIGN KEY (question_id) REFERENCES Question (question_id)
          ON DELETE NO ACTION
          ON UPDATE NO ACTION,
@@ -43,7 +43,7 @@ CREATE TABLE Filled_test (
 
 -- Tabulka Otázka
 CREATE TABLE Question (
-     question_id INTEGER PRIMARY KEY AUTOINCREMENT,
+     question_id VARCHAR(20) PRIMARY KEY,
      title VARCHAR(35) NOT NULL,
      task VARCHAR(100) NOT NULL,
      help VARCHAR(100),
@@ -61,7 +61,6 @@ CREATE TABLE Test (
      subject VARCHAR(25) NOT NULL,
      datetime DATETIME NOT NULL DEFAULT (datetime('now')),
      sequence BOOLEAN NOT NULL DEFAULT 0,
-     max_time TIME,
      user_id INTEGER,
      FOREIGN KEY (user_id) REFERENCES Profile (user_id)
          ON DELETE SET NULL

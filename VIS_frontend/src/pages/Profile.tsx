@@ -3,7 +3,7 @@ import {useUserContext} from "../utils/providers/UserProvider.tsx";
 import {useNavigate} from "react-router-dom";
 import {TestCard} from "../components/TestCard.tsx";
 import {Button} from "react-bootstrap";
-import {getLatestTest} from "../api/testService.tsx";
+import {getLatestTest} from "../api/testService.ts";
 import {LatestTestsType} from "../utils/types/LatestTestsType.ts";
 
 export const Profile:FC = () => {

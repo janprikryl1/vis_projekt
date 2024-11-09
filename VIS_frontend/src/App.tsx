@@ -9,6 +9,8 @@ import {Profile} from "./pages/Profile.tsx";
 import {ProviderUser} from "./utils/providers/UserProvider.tsx";
 import {SignIn} from "./pages/SignIn.tsx";
 import {Register} from "./pages/Register.tsx";
+import {TestStatistics} from "./pages/TestStatistics.tsx";
+import {AdminDashboard} from "./pages/AdminDashboard.tsx";
 
 function App() {
 
@@ -22,8 +24,8 @@ function App() {
                   <Route path="/test/:id" element={<Test />} />
                   <Route path="/new_test" element={<NewTest />} />
                   <Route path="/new_test/:id" element={<NewTest />} />
-                  <Route path="/question/:id" element={<p>Question</p>} />
-                  <Route path="/new_question" element={<p>New quesion</p>} />
+                  <Route path="/test-statistics/:id" element={<TestStatistics />} />
+                  <Route path="/admin-dashboard" element={<AdminDashboard />} />
                   <Route path="/login" element={<SignIn />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/profile" element={<Profile />} />

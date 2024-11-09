@@ -11,8 +11,9 @@ import {
 } from 'react';
 import {useParams} from "react-router-dom";
 import {NewTestType} from "../types/NewTestType.ts";
-import {getTest, uploadNewTest} from "../../api/testService.tsx";
+import {getTest, uploadNewTest} from "../../api/testService.ts";
 import { v4 as uuidv4 } from "uuid";
+import Swal from "sweetalert2";
 
 type NewArticleContextType = {
     test: NewTestType;
@@ -37,10 +38,9 @@ export const NewTestProvider: FC<{ children: ReactNode }> = ({ children }) => {
         questions: [{
             id: uuidv4(),
             title: "",
-            description: "",
             task: "",
+            help: "",
             corrects: [],
-            show_correct: true,
         }]
     });
 
@@ -69,20 +69,35 @@ export const NewTestProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const handleSubmit: MouseEventHandler<HTMLButtonElement> = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const formData = new FormData();
+        if (test.test_id) formData.append("test_id", test.test_id.toString());
         formData.append("test_title", test.test_title);
         formData.append("description", test.description);
         formData.append("subject", test.subject);
         formData.append("sequence", test.sequence.toString());
-        if (test.max_time) formData.append("max_time", test.max_time.toString());
         formData.append("questions", JSON.stringify(test.questions));
 
         try {
             const result = await uploadNewTest(formData);
-            if (result.status === 200) {
-
+            if (result.status === 201) {
+                Swal.fire({
+                    title: test.test_id ? "Test aktualizován" : "Test uložen",
+                    icon: "success",
+                    showConfirmButton: false,
+                });
+                setTest((prevTest: NewTestType) => ({
+                    ...prevTest,
+                    test_id: result.data.test_id,
+                }));
+                console.log(result.data, test);
             }
         } catch (e) {
             console.error(e);
+            Swal.fire({
+                title: "Chyba",
+                text: "Test se nepodařilo uložit",
+                icon: "error",
+                showConfirmButton: false,
+            });
         }
     };
 

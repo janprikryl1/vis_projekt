@@ -11,12 +11,11 @@ export const ContentNavigation: FC = () => {
     const handleIncreaseCategory = () => {
         if (currentQuestionIndex === test.questions.length - 1) {
             const newQuestion: NewQuestionType = {
-                id: uuidv4(), // Generate a unique string ID for the new question
+                id: uuidv4(),
                 title: "",
-                description: "",
                 task: "",
                 corrects: [],
-                show_correct: true,
+                help: "",
             };
             setTest((prevState: NewTestType) => ({
                 ...prevState,

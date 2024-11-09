@@ -7,7 +7,6 @@ export type NewTestType = {
     subject: string;
     date_time: string;
     sequence: boolean;
-    max_time?: number;
     datetime?: string;
     questions: NewQuestionType[];
 }

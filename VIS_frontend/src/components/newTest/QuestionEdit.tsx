@@ -1,7 +1,6 @@
 import {FC} from "react";
 import {useNewArticleContext} from "../../utils/providers/NewTestProvider.tsx";
 import {NewTestInput} from "./NewTestInput.tsx";
-import {NewTestCheckBox} from "./NewTestCheckBox.tsx";
 import {QuestionCorrectOptions} from "./QuestionCorrectOptions.tsx";
 import {NewTestType} from "../../utils/types/NewTestType.ts";
 
@@ -27,9 +26,8 @@ export const QuestionEdit:FC = () => {
     return (
         <div className="container">
             <NewTestInput value={test.questions[currentQuestionIndex].title} name="title" placeholder="Název otázky" onChange={handleChange} />
-            <NewTestInput value={test.questions[currentQuestionIndex].description} name="description" placeholder="Popis" onChange={handleChange} />
             <NewTestInput value={test.questions[currentQuestionIndex].task} name="task" placeholder="Úkol" onChange={handleChange} />
-            <NewTestCheckBox name="show_correct" value={test.questions[currentQuestionIndex].show_correct} title="Zobrazit správné" onChange={handleChange} />
+            <NewTestInput value={test.questions[currentQuestionIndex].help} name="help" placeholder="Nápověda" onChange={handleChange} />
             <QuestionCorrectOptions />
         </div>
     )

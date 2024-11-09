@@ -16,9 +16,9 @@ export const TestCard:FC<Props> = ({test}) => {
         <div className="col-sm-4 paddingTop">
             <Card>
                 <Card.Body>
-                    <Card.Title><Link to={`${user?.user_type === "student" ? `/test` : '/new_test'}/${test.test_id}`} className="underline-none">{test.test_title}</Link></Card.Title>
+                    <Card.Title><Link to={`${user?.user_type === "Pupil" ? `/test` : '/new_test'}/${test.test_id}`} className="underline-none">{"title" in test ? test.title : test.test_title}</Link></Card.Title>
                     <Card.Text>
-                        {"description" in test ? test.description : test.date_time}
+                        {"description" in test ? test.description : test.created_at}
                     </Card.Text>
                 </Card.Body>
             </Card>

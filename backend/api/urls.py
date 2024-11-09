@@ -10,5 +10,7 @@ urlpatterns = [
     path('tests', views.TestsView.as_view(), name='tests'),
     path('new_test', views.NewTest.as_view(), name='new-test'),
     path('test/<int:test_id>', views.TestView.as_view(), name='test'),
-
+    path('evaluate_test', views.EvaluateTest.as_view(), name='evaluate-test'),
+    path('tables', views.TablesView.as_view(), name='tables'),
+    path('get_all_data/<str:table_name>', views.GetAllData.as_view(), name='get-all-data'),
 ]

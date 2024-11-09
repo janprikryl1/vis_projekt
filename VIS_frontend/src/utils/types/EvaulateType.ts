@@ -1,3 +1,4 @@
 export type EvaulateType = {
-    status: string;
+    is_correct: boolean;
+    filled_question_id: number;
 }

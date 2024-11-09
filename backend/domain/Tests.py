@@ -1,4 +1,5 @@
-from data.TestData import get_filled_tests_for_student, get_created_tests_for_teacher
+from data.TestData import get_filled_tests_for_student, get_created_tests_for_teacher, get_not_filled_tests, \
+    get_all_tests
 from data.ProfileData import get_user_info_by_token
 
 class TestsService:
@@ -14,11 +15,8 @@ class TestsService:
 
     def get_tests(self):
         if self.user_type == "P":
-            return get_filled_tests_for_student(self.user_id)
+            return {'filled_tests': get_filled_tests_for_student(self.user_id), 'tests': get_not_filled_tests()}
         elif self.user_type == "T":
-            test = get_created_tests_for_teacher(self.user_id)
-            if test.user_id == self.user_id:
-                return test
-            return []
-        else:
-            return []
+            return {'tests': get_created_tests_for_teacher(self.user_id)}
+        elif self.user_type == "A":
+            return {'tests': get_all_tests()}

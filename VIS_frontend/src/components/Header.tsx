@@ -19,7 +19,7 @@ export const Header:FC = () => {
                         navbarScroll
                     >
                         <Nav.Link href="/">Domů</Nav.Link>
-                        <Nav.Link href="/tests">Testy</Nav.Link>
+                        {user?.user_type === "Admin" ? <Nav.Link href="/admin-dashboard">Dashboard</Nav.Link> : <Nav.Link href="/tests">Testy</Nav.Link>}
                     </Nav>
                     <div className="d-flex">
                         {user ? (

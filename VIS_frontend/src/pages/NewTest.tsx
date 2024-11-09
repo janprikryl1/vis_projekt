@@ -3,6 +3,7 @@ import {NewTestQuestionList} from "../components/newTest/NewTestQuestionList.tsx
 import {NewTestSaveButton} from "../components/newTest/NewTestSaveButton.tsx";
 import {NewTestProperties} from "../components/newTest/NewTestProperties.tsx";
 import {NewTestProvider} from "../utils/providers/NewTestProvider.tsx";
+import {TestStatisticLink} from "../components/newTest/TestStatisticLink.tsx";
 
 export const NewTest: FC = () => {
 
@@ -12,6 +13,7 @@ export const NewTest: FC = () => {
                 <NewTestProperties />
                 <NewTestQuestionList />
                 <NewTestSaveButton />
+                <TestStatisticLink />
             </div>
         </NewTestProvider>
     );
