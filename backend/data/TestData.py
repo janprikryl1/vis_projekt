@@ -38,7 +38,7 @@ def get_filled_tests_for_student(user_id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT Filled_test.filled_test_id, Test.title, Filled_test.date_time_beginning
+        SELECT Test.test_id, Test.title, Filled_test.date_time_beginning
         FROM Filled_test
         JOIN Test ON Test.test_id = Filled_test.test_id
         WHERE Filled_test.user_id = ?
