@@ -73,3 +73,4 @@ def get_correct_choices_for_question(question_id):
 
     conn.close()
     return correct_choices
+

@@ -1,18 +1,17 @@
 #//ideálně transaction script nebo table module
 import json
-
 from django.http import HttpResponse
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from data.DetailTest import TestDetailService
-from data.TestData import get_filled_test_detail_for_student, get_test_detail_for_teacher
 from domain.CheckAuthenticated import CheckAuthenticated
+from domain.FilledQuestionStatisticsService import FilledQuestionStatisticsService
 from domain.LatestTests import LatestTests
 from domain.Login import Login
 from domain.Register import Register
 from domain.Tables import Tables
+from domain.TestStatisticsService import TestStatisticsService
 from domain.Tests import TestsService
 from domain.TestService import TestService
 
@@ -144,6 +143,31 @@ class NewTest(APIView):
         else: #Update test
             test_service.update_test(test_id, title, description, subject, sequence, max_time, questions)
         return Response({'test_id': test_id}, status=status.HTTP_201_CREATED)
+
+class TestStatistics(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def get(self, request, test_id):
+        auth_header = request.headers.get('Authorization')
+        test_service = TestStatisticsService(auth_header)
+        if test_service.error:
+            return Response(test_service.error, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(test_service.get_test_statistics(test_id), status=status.HTTP_200_OK)
+
+
+class QuestionStatistics(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def get(self, request, question_id):
+        auth_header = request.headers.get('Authorization')
+        question_service = FilledQuestionStatisticsService(auth_header)
+        if question_service.error:
+            return Response(question_service.error, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(question_service.get_question_statistics(question_id), status=status.HTTP_200_OK)
 
 
 class EvaluateTest(APIView):

@@ -13,4 +13,6 @@ urlpatterns = [
     path('evaluate_test', views.EvaluateTest.as_view(), name='evaluate-test'),
     path('tables', views.TablesView.as_view(), name='tables'),
     path('get_all_data/<str:table_name>', views.GetAllData.as_view(), name='get-all-data'),
+    path('test_statistics/<str:test_id>', views.TestStatistics.as_view(), name='test-statistics'),
+    path('question_statistics/<str:question_id>', views.QuestionStatistics.as_view(), name='question-statistics'),
 ]
