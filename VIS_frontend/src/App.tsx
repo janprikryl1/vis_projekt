@@ -11,6 +11,7 @@ import {SignIn} from "./pages/SignIn.tsx";
 import {Register} from "./pages/Register.tsx";
 import {TestStatistics} from "./pages/TestStatistics.tsx";
 import {AdminDashboard} from "./pages/AdminDashboard.tsx";
+import {QuestionStatistics} from "./pages/QuestionStatistics.tsx";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
                   <Route path="/new_test" element={<NewTest />} />
                   <Route path="/new_test/:id" element={<NewTest />} />
                   <Route path="/test-statistics/:id" element={<TestStatistics />} />
+                  <Route path="/question_statistics/:id" element={<QuestionStatistics />} />
                   <Route path="/admin-dashboard" element={<AdminDashboard />} />
                   <Route path="/login" element={<SignIn />} />
                   <Route path="/register" element={<Register />} />

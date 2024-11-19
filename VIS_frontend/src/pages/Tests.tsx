@@ -26,26 +26,24 @@ export const Tests:FC = () => {
     return (
         <div className="container">
             <h1>Testy</h1>
-            {user && user.user_type === "Teacher" && <Link to="/new_test">Přidat test</Link>}
+            {user && user.user_type === "Teacher" ? <Link to="/new_test">Přidat test</Link>
+            :user?.user_type === "Pupil" && tests && tests.filled_tests && tests.filled_tests.length > 0 && (
+                <>
+                    <h2>Vyplněné testy</h2>
+                    {tests.filled_tests.map((filled_test, index) => (
+                        <TestCard key={index} test={filled_test} />
+                    ))}
+                </>
+            )}
             <div className="row">
-            {tests === undefined ?
+                <h2>Všechny testy</h2>
+                {tests === undefined ?
                 Array.from({ length: 9 }).map((_, index) => (
                 <TestCardSkeleton key={index} />
             )) : tests.tests.length === 0 ? (
                     <p>Žádné testy</p>
             ) : tests.tests.map((test, index) => (
-                <>
-                    {user?.user_type === "Pupil" && tests.filled_tests.length > 0 && (
-                        <>
-                            <h2>Vyplněné testy</h2>
-                            {tests.filled_tests.map((filled_test, index) => (
-                                <TestCard key={index} test={filled_test} />
-                            ))}
-                        </>
-                    )}
-                    <h2>Všechny testy</h2>
-                    <TestCard key={index} test={test} />
-                </>
+                <TestCard key={index} test={test} />
             ))}
             </div>
         </div>

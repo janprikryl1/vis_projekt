@@ -17,7 +17,7 @@ export const Test:FC = () => {
         const getTestDetails = async () => {
             try {
                 const result = await getTest(id);
-                console.error(result.data)
+                console.log(result.data);
                 setTest(result.data);
             } catch (e) {
                 console.error(e);
@@ -34,7 +34,7 @@ export const Test:FC = () => {
         setTest((prevTest) => {
             if (!prevTest) return prevTest;
             const updatedQuestions = prevTest.test.questions.map((question) => {
-                if (question.question.id === question_id) {
+                if (question.id === question_id) {
                     return {
                         ...question,
                         is_correct: status,
@@ -78,7 +78,7 @@ export const Test:FC = () => {
                                     <div className="col-sm-8" key={index}>
                                         <div className="row">
                                             <div className="col-sm-4">
-                                                <Link to="#" onClick={() => handleSelectQuestion(question)}>{question.question.title}</Link>
+                                                <Link to="#" onClick={() => handleSelectQuestion(question)}>{question.question}</Link>
                                             </div>
                                             <div className="col-sm-4">
                                             {question.is_correct ? (

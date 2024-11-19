@@ -22,8 +22,8 @@ export const Question:FC<Props> = ({filled_test_id,question, setQuestionAnswer})
 
     const evaluate = async () => {
         try {
-            const result = await evaluateTest(filled_test_id, question!.question.id, answer);
-            setQuestionAnswer(question!.question.id, result.data.is_correct);
+            const result = await evaluateTest(filled_test_id, question!.id, answer);
+            setQuestionAnswer(question!.id, result.data.is_correct);
             if (result.data.is_correct === true) {
                 Swal.fire({
                     title: "Úspěšně",
@@ -51,9 +51,9 @@ export const Question:FC<Props> = ({filled_test_id,question, setQuestionAnswer})
     if (question) {
         return (
             <div className="mt-3">
-                <h1>{question.question.title}</h1>
-                <p>{question.question.task}?</p>
-                <p>{question.question.help}</p>
+                <h1>{question.question}</h1>
+                <p>{question.task}?</p>
+                <p>{question.help}</p>
                 <div className="row">
                     <div className="col-sm-6">
                     <Form.Control

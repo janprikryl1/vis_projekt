@@ -5,6 +5,7 @@ import {TestCard} from "../components/TestCard.tsx";
 import {Button} from "react-bootstrap";
 import {getLatestTest} from "../api/testService.ts";
 import {LatestTestsType} from "../utils/types/LatestTestsType.ts";
+import {v4 as uuidv4} from 'uuid';
 
 export const Profile:FC = () => {
     const {user, logout} = useUserContext();
@@ -16,7 +17,7 @@ export const Profile:FC = () => {
         const loadLatestTests = async () => {
             try {
                 const result = await getLatestTest();
-                setLastTests(result.data);
+                setLastTests(result.data.latest_tests);
             } catch (e) {
                 console.error(e);
             }
@@ -42,7 +43,7 @@ export const Profile:FC = () => {
                 </div>
                 <div className="row">
                     <h3>Moje poslední testy</h3>
-                    <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5" style={{marginTop: -15, marginLeft: "0.1%"}}>
+                    <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5" style={{marginTop: -15, marginLeft: "0.1%"}} key={uuidv4()}>
                         {lastTests === undefined ? (
                             <p>Načítání posledních testů</p>
                         ) : lastTests.length === 0 ? (

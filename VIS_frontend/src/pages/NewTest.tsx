@@ -6,7 +6,6 @@ import {NewTestProvider} from "../utils/providers/NewTestProvider.tsx";
 import {TestStatisticLink} from "../components/newTest/TestStatisticLink.tsx";
 
 export const NewTest: FC = () => {
-
     return (
         <NewTestProvider>
             <div className="container">
