@@ -6,6 +6,6 @@ export type TestType = {
     description: string;
     subject: string;
     datetime: string;
-    sequence: boolean;
+    sequence: string;
     questions: QuestionType[];
 }

@@ -46,7 +46,6 @@ class TestDetailService:
         # Fetch questions and calculate score
         questions = self._fetch_questions_for_test(test_id)
         score = self._calculate_score(test_id, filled_test_detail['filled_test_id'])
-
         return {
             'filled_test_id': filled_test_detail['filled_test_id'],
             'date_time_beginning': filled_test_detail['date_time_beginning'],

@@ -34,7 +34,7 @@ export const NewTestProvider: FC<{ children: ReactNode }> = ({ children }) => {
         description: "",
         subject: "",
         date_time: "",
-        sequence: false,
+        sequence: "false",
         questions: [{
             id: uuidv4(),
             title: "",
@@ -62,7 +62,7 @@ export const NewTestProvider: FC<{ children: ReactNode }> = ({ children }) => {
         const { name, value, type, checked } = e.target;
         setTest((prevTest) => ({
             ...prevTest,
-            [name]: type === "checkbox" ? checked : value,
+            [name]: type === "checkbox" ? prevTest.sequence === "true" ? "false" : "true" : value,
         }));
     };
 

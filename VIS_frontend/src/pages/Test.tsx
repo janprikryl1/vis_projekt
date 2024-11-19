@@ -26,9 +26,18 @@ export const Test:FC = () => {
         getTestDetails();
     }, [id]);
 
-    const handleSelectQuestion = (question: QuestionType) => {
+    const handleSelectQuestion = (question: QuestionType, index: number) => {
+        if (test?.test.sequence === "true") {
+            const lastAnsweredIndex = test.test.questions.findIndex(
+                (q) => q.is_correct === null
+            );
+            if (index > lastAnsweredIndex && lastAnsweredIndex !== -1) {
+                alert("Nemůžete pokračovat na další otázku, dokud nevyplníte aktuální.");
+                return;
+            }
+        }
         setSelectedQuestion(question);
-    }
+    };
 
     const setQuestionAnswer = (question_id: string, status: boolean) => {
         setTest((prevTest) => {
@@ -67,7 +76,7 @@ export const Test:FC = () => {
                                 <h1>{test.test.title}</h1>
                                 <h2>{test.test.subject}</h2>
                                 <h3 style={{whiteSpace: "pre-line"}}>{test.test.description}</h3>
-                                <p>Test {test.test.sequence ? "je skevenční" : "není sekvenční"}</p>
+                                <p>Test {test.test.sequence === "true" ? "je skevenční" : "není sekvenční"}</p>
                                 <p>Vyplněno: {toCzechDateFormat(test.date_time_beginning)} - {toCzechDateFormat(test.date_time_end)}</p>
                                 <p>Dokončeno na {test.score} %</p>
                         </div>
@@ -78,16 +87,18 @@ export const Test:FC = () => {
                                     <div className="col-sm-8" key={index}>
                                         <div className="row">
                                             <div className="col-sm-4">
-                                                <Link to="#" onClick={() => handleSelectQuestion(question)}>{question.question}</Link>
+                                                <Link to="#" onClick={() => handleSelectQuestion(question, index)}>
+                                                    {question.question}
+                                                </Link>
                                             </div>
                                             <div className="col-sm-4">
-                                            {question.is_correct ? (
-                                                <p style={{color: "green"}}>Úspěšně vyplněno</p>
-                                            ) : question.is_correct === null ?(
-                                                <p style={{color: "gray"}}>Nevyplněno</p>
-                                            ) : (
-                                                <p style={{color: "red"}}>Špatně</p>
-                                            )}
+                                                {question.is_correct ? (
+                                                    <p style={{color: "green"}}>Úspěšně vyplněno</p>
+                                                ) : question.is_correct === null ? (
+                                                    <p style={{color: "gray"}}>Nevyplněno</p>
+                                                ) : (
+                                                    <p style={{color: "red"}}>Špatně</p>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

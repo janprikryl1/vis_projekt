@@ -2,7 +2,7 @@ import {FC} from "react";
 import Form from "react-bootstrap/Form";
 
 type Props = {
-    value: boolean;
+    value: string;
     name: string;
     title: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -15,7 +15,7 @@ export const NewTestCheckBox:FC<Props> = ({value, name, title, onChange}) => {
             <Form.Check
                 type="checkbox"
                 label="Ano"
-                checked={value}
+                checked={value === "true"}
                 onChange={onChange}
                 name={name}
             />

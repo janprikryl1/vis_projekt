@@ -6,7 +6,7 @@ export type NewTestType = {
     description: string;
     subject: string;
     date_time: string;
-    sequence: boolean;
+    sequence: string;
     datetime?: string;
     questions: NewQuestionType[];
 }

@@ -19,17 +19,15 @@ def update_question(test_id, question_id, question):
     cursor.execute("SELECT question_id FROM Question WHERE question_id = ?", (question_id,))
     exists = cursor.fetchone()
 
-    if exists:
-        # Update existing question
+    if exists:  # Update existing question
         cursor.execute(
             "UPDATE Question SET title = ?, task = ?, help = ?, test_id = ? WHERE question_id = ?",
-            (question['title'], question['task'], question['help'], test_id, question_id)
+            (question['question'], question['task'], question['help'], test_id, question_id)
         )
-    else:
-        # Insert new question
+    else:  # Insert new question
         cursor.execute(
             "INSERT INTO Question (question_id, title, task, help, test_id) VALUES (?, ?, ?, ?, ?)",
-            (question_id, question['title'], question['task'], question['help'], test_id)
+            (question_id, question['question'], question['task'], question['help'], test_id)
         )
 
     conn.commit()

@@ -60,7 +60,7 @@ CREATE TABLE Test (
      description VARCHAR(30) NOT NULL,
      subject VARCHAR(25) NOT NULL,
      datetime DATETIME NOT NULL DEFAULT (datetime('now')),
-     sequence BOOLEAN NOT NULL DEFAULT 0,
+     sequence BOOLEAN NOT NULL DEFAULT false,
      user_id INTEGER,
      FOREIGN KEY (user_id) REFERENCES Profile (user_id)
          ON DELETE SET NULL
