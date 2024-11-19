@@ -1,4 +1,4 @@
-#//ideálně transaction script nebo table module
+# Transaction script
 import json
 from django.http import HttpResponse
 from rest_framework import status, permissions
@@ -8,7 +8,7 @@ from data.DetailTest import TestDetailService
 from domain.CheckAuthenticated import CheckAuthenticated
 from domain.FilledQuestionStatisticsService import FilledQuestionStatisticsService
 from domain.LatestTests import LatestTests
-from domain.Login import Login
+from domain.Login import LoginDTO
 from domain.Register import Register
 from domain.Tables import Tables
 from domain.TestStatisticsService import TestStatisticsService
@@ -45,7 +45,7 @@ class LoginView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
 
-        login_service = Login()
+        login_service = LoginDTO()
         result = login_service.login_user(email, password)
 
         return Response(result, status=status.HTTP_200_OK)
@@ -55,7 +55,6 @@ class IsAuthenticatedView(APIView):
     authentication_classes = ()
 
     def get(self, request):
-        # Get the token from the Authorization header
         auth_header = request.headers.get('Authorization')
         token = auth_header.split(" ")[1] if auth_header else None
 
@@ -178,18 +177,20 @@ class EvaluateTest(APIView):
         auth_header = request.headers.get('Authorization')
         test_service = TestService(auth_header)
 
+        if test_service.error:
+            return Response({'error': test_service.error}, status=status.HTTP_401_UNAUTHORIZED)
+
         filled_test_id = request.data.get('filled_test_id')
         question_id = request.data.get('question_id')
         solution = request.data.get('solution')
 
-        is_correct = test_service.evaluate_test(question_id, solution)
-        existing_filled_question_id = test_service.filled_question_exists(filled_test_id, question_id)
-        if existing_filled_question_id:
-            test_service.update_filled_question_result(existing_filled_question_id, solution, is_correct)
-            filled_question_id = existing_filled_question_id
-        else:
-            filled_question_id = test_service.save_filled_question_result(filled_test_id, question_id, solution, is_correct)
+        if not (filled_test_id and question_id and solution is not None):
+            return Response(
+                {'error': 'Missing required parameters: filled_test_id, question_id, solution'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
+        filled_question_id, is_correct = test_service.evaulate(question_id, solution, filled_test_id)
         return Response({
             'filled_question_id': filled_question_id,
             'is_correct': is_correct

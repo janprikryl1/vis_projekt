@@ -20,22 +20,23 @@ def update_correct_solution(question_id, correct_solution_id, correct_solution):
                    (correct_solution_id,))
     exists = cursor.fetchone()
 
-    if exists:
-        # Update existing correct solution
+    if exists: # Update existing correct solution
         cursor.execute(
             "UPDATE Correct_solution SET correct_solution_text = ?, case_sensitive = ? WHERE correct_solution_id = ?",
             (correct_solution['correct_solution_text'], correct_solution['case_sensitive'], correct_solution_id)
         )
-    else:
-        # Insert new correct solution
+    else: # Insert new correct solution
         cursor.execute(
-            "INSERT INTO Correct_solution (correct_solution_id, correct_solution_text, case_sensitive, question_id) VALUES (?, ?, ?, ?)",
-            (correct_solution_id, correct_solution['correct_solution_text'], correct_solution['case_sensitive'],
-             question_id)
+            """
+            INSERT INTO Correct_solution (correct_solution_id, correct_solution_text, case_sensitive, question_id) 
+            VALUES (?, ?, ?, ?)
+            """,
+            (correct_solution_id, correct_solution['correct_solution_text'], correct_solution['case_sensitive'], question_id)
         )
 
     conn.commit()
     conn.close()
+
 def delete_outdated_correct_solutions(question_id, current_correct_solution_ids):
     conn = get_db_connection()
     cursor = conn.cursor()

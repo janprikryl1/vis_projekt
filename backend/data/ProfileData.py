@@ -1,36 +1,6 @@
 from hashlib import sha256
-import os
 from data.DBConnection import get_db_connection
 
-
-def email_exists(email):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT COUNT(*) FROM Profile WHERE email = ?", (email,))
-    exists = cursor.fetchone()[0] > 0
-    conn.close()
-    return exists
-
-
-def create_user(name, surname, email, password, user_type='P'):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    encrypted_password = sha256(password.encode()).hexdigest()
-
-    cursor.execute("""
-        INSERT INTO Profile (name, surname, email, password, user_type)
-        VALUES (?, ?, ?, ?, ?)
-    """, (name, surname, email, encrypted_password, user_type))
-
-    user_id = cursor.lastrowid
-
-    token = os.urandom(32).hex()
-    cursor.execute("INSERT INTO Tokens (user_id, token) VALUES (?, ?)", (user_id, token))
-
-    conn.commit()
-    conn.close()
-    return user_id, token
 
 def login_user(email, password):
     conn = get_db_connection()
@@ -90,3 +60,5 @@ def get_user_info_by_token(token):
         return {'user_id': result[0], 'user_type': result[1]}
 
     return None
+
+

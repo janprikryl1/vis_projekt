@@ -1,17 +1,20 @@
-from data.ProfileData import login_user
+from data.LoginDTO import LoginDTO
 
-class Login:
-    def login_user(self, email, password):
-        user_data = login_user(email, password)
 
-        if user_data is None:
-            return {'user_id': None}
+class LoginService:
+    @staticmethod
+    def login_user(email, password):
+        user_data = LoginDTO.get_user_by_credentials(email, password)
 
-        return {
-            'token': user_data[0],
-            'user_id': user_data[1],
-            'name': user_data[2],
-            'surname': user_data[3],
-            'email': user_data[4],
-            'user_type': user_data[5]
-        }
+        if user_data:
+            token, user_id, name, surname, email, user_type = user_data
+            return {
+                'token': token,
+                'user_id': user_id,
+                'name': name,
+                'surname': surname,
+                'email': email,
+                'user_type': 'Pupil' if user_type == 'P' else 'Teacher' if user_type == 'T' else 'Admin'
+            }
+
+        return None
