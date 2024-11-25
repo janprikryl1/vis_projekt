@@ -1,25 +1,11 @@
 from data.FilledTestDTO import get_filled_tests_by_user
 from data.TestDTO import get_all_tests
-from data.ProfileDTO import get_user_info_by_token
+from domain.BaseService import BaseService
 
 
-class LatestTests:
+class LatestTests(BaseService):
     def __init__(self, auth_header):
-        self.error = None
-
-        if not auth_header or not auth_header.startswith("Bearer "):
-            self.error = 'Authorization token not provided'
-            return
-
-        token = auth_header.split(" ")[1]
-        user_data = get_user_info_by_token(token)
-
-        if not user_data:
-            self.error = 'Invalid token'
-            return
-
-        self.user_id = user_data['user_id']
-        self.user_type = user_data['user_type']
+        super().__init__(auth_header)
 
     def get_latest_tests(self):
         if self.error:

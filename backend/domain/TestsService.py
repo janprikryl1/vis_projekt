@@ -3,18 +3,12 @@ from data.TestDTO import (
     create_test, update_test, get_test_by_id, delete_test, get_all_tests
 )
 from data.ProfileDTO import get_user_info_by_token
+from domain.BaseService import BaseService
 
 
-class TestsService:
+class TestsService(BaseService):
     def __init__(self, auth_header):
-        token = auth_header.split(" ")[1]
-        user_data = get_user_info_by_token(token)
-        if not user_data:
-            self.error = 'Invalid token'
-        else:
-            self.user_id = user_data['user_id']
-            self.user_type = user_data['user_type']
-            self.error = None
+        super().__init__(auth_header)
 
     def get_tests(self):
         if self.error:

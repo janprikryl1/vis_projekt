@@ -11,40 +11,46 @@ def save_question(test_id, question):
     conn.close()
 
 
-def update_question(test_id, question_id, question):
+def get_question_exists(question_id):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Check if question exists
     cursor.execute("SELECT question_id FROM Question WHERE question_id = ?", (question_id,))
     exists = cursor.fetchone()
 
-    if exists:  # Update existing question
-        cursor.execute(
-            "UPDATE Question SET title = ?, task = ?, help = ?, test_id = ? WHERE question_id = ?",
-            (question['question'], question['task'], question['help'], test_id, question_id)
-        )
-    else:  # Insert new question
-        cursor.execute(
-            "INSERT INTO Question (question_id, title, task, help, test_id) VALUES (?, ?, ?, ?, ?)",
-            (question_id, question['question'], question['task'], question['help'], test_id)
-        )
+    conn.close()
+    return exists
+
+
+def update_question(test_id, question_id, question):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE Question SET title = ?, task = ?, help = ?, test_id = ? WHERE question_id = ?",
+        (question['title'], question['task'], question['help'], test_id, question_id)
+    )
 
     conn.commit()
     conn.close()
 
 
-def delete_outdated_questions(test_id, current_question_ids):
+def get_test_question_ids(test_id):
     conn = get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute("SELECT question_id FROM Question WHERE test_id = ?", (test_id,))
     existing_question_ids = {row[0] for row in cursor.fetchall()}
 
-    question_ids_to_delete = existing_question_ids - current_question_ids
-    for question_id in question_ids_to_delete:
-        cursor.execute("DELETE FROM Correct_solution WHERE question_id = ?", (question_id,))
-        cursor.execute("DELETE FROM Question WHERE question_id = ?", (question_id,))
+    conn.close()
+    return existing_question_ids
+
+
+def delete_outdated_questions(question_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM Correct_solution WHERE question_id = ?", (question_id,))
+    cursor.execute("DELETE FROM Question WHERE question_id = ?", (question_id,))
 
     conn.commit()
     conn.close()

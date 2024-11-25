@@ -30,12 +30,11 @@ class Question:
         self.test = test
 
 class FilledTest:
-    def __init__(self, filled_test_id, test=None, user=None, date_time_beginning=None, date_time_end=None):
+    def __init__(self, filled_test_id, test=None, user=None, date_time_beginning=None):
         self.filled_test_id = filled_test_id
         self.test = test
         self.user = user
         self.date_time_beginning = date_time_beginning or datetime.now()
-        self.date_time_end = date_time_end
 
 class FilledQuestion:
     def __init__(self, question=None, solution="Test", is_correct=False, filled_test=None):

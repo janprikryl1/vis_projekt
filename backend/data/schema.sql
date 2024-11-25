@@ -1,4 +1,4 @@
--- Vytvoření tabulek
+-- Tabulky
 
 -- Tabulka správné řešení
 CREATE TABLE Correct_solution (
@@ -32,7 +32,6 @@ CREATE TABLE Filled_test (
      test_id INTEGER,
      user_id INTEGER,
      date_time_beginning DATETIME NOT NULL DEFAULT (datetime('now')),
-     date_time_end DATETIME,
      FOREIGN KEY (test_id) REFERENCES Test (test_id)
          ON DELETE NO ACTION
          ON UPDATE NO ACTION,
