@@ -77,7 +77,7 @@ export const Test:FC = () => {
                                 <h2>{test.test.subject}</h2>
                                 <h3 style={{whiteSpace: "pre-line"}}>{test.test.description}</h3>
                                 <p>Test {test.test.sequence === "true" ? "je skevenční" : "není sekvenční"}</p>
-                                <p>Vyplněno: {toCzechDateFormat(test.date_time_beginning)} - {toCzechDateFormat(test.date_time_end)}</p>
+                                <p>Vyplněno: {toCzechDateFormat(test.date_time_beginning)}</p>
                                 <p>Dokončeno na {test.score} %</p>
                         </div>
                         <div className="col-sm-8">
@@ -88,7 +88,7 @@ export const Test:FC = () => {
                                         <div className="row">
                                             <div className="col-sm-4">
                                                 <Link to="#" onClick={() => handleSelectQuestion(question, index)}>
-                                                    {question.question}
+                                                    {question.title}
                                                 </Link>
                                             </div>
                                             <div className="col-sm-4">

@@ -5,5 +5,4 @@ export type FilledTestType = {
     test: TestType;
     score: number;
     date_time_beginning: string;
-    date_time_end: string;
 }

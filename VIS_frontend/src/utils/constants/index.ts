@@ -11,3 +11,16 @@ export const toCzechDateFormat = (dateRaw: string): string => {
 
     return `${day}. ${month}. ${year} ${hours}:${minutes}`;
 }
+
+export const toCzechRole = (role: string): string => {
+    switch (role) {
+        case "Teacher":
+            return "Učitel";
+        case "Pupil":
+            return "Žák";
+        case "Admin":
+            return "Administrator";
+        default:
+            return "Neznámý role";
+    }
+}

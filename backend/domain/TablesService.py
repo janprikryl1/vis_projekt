@@ -1,4 +1,4 @@
-from data.TablesData import get_all_tables, get_all_table_data
+from data.TablesDTO import get_all_tables, get_all_table_data
 
 
 class Tables:

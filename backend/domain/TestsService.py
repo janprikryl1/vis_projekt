@@ -1,8 +1,8 @@
+from data.FilledTestDTO import get_filled_tests_by_user, get_tests_not_filled_by_user
 from data.TestDTO import (
-    create_test, update_test, get_test_by_id, delete_test, create_filled_test,
-    get_filled_tests_by_user, get_all_tests, get_tests_not_filled_by_user
+    create_test, update_test, get_test_by_id, delete_test, get_all_tests
 )
-from data.ProfileData import get_user_info_by_token
+from data.ProfileDTO import get_user_info_by_token
 
 
 class TestsService:

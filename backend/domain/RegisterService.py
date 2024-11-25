@@ -1,6 +1,6 @@
 import os
 from hashlib import sha256
-from data.ProfileDTO import ProfileDTO
+from data import ProfileDTO
 from data.TokenDTO import TokenDTO
 
 

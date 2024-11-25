@@ -2,7 +2,7 @@ import {NewQuestionType} from "./NewQuestionType.ts";
 
 export type QuestionType = {
     id: string;
-    question: string;
+    title: string;
     task: string;
     help: string;
     corrects: NewQuestionType[];

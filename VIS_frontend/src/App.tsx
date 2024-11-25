@@ -27,7 +27,7 @@ function App() {
                   <Route path="/new_test/:id" element={<NewTest />} />
                   <Route path="/test-statistics/:id" element={<TestStatistics />} />
                   <Route path="/question_statistics/:id" element={<QuestionStatistics />} />
-                  <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                  <Route path="/admin_dashboard" element={<AdminDashboard />} />
                   <Route path="/login" element={<SignIn />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/profile" element={<Profile />} />

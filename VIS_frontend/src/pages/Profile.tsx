@@ -6,6 +6,7 @@ import {Button} from "react-bootstrap";
 import {getLatestTest} from "../api/testService.ts";
 import {LatestTestsType} from "../utils/types/LatestTestsType.ts";
 import {v4 as uuidv4} from 'uuid';
+import {toCzechRole} from "../utils/constants";
 
 export const Profile:FC = () => {
     const {user, logout} = useUserContext();
@@ -38,7 +39,7 @@ export const Profile:FC = () => {
                     <p>Jméno: {user.name}</p>
                     <p>Přijmení: {user.surname}</p>
                     <p>Email: {user.email}</p>
-                    <p>Typ: {user.user_type}</p>
+                    <p>Typ: {toCzechRole(user.user_type)}</p>
                     <Button variant="warning" onClick={logout}>Odhlásit se</Button>
                 </div>
                 <div className="row">

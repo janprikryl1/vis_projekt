@@ -51,7 +51,7 @@ export const Question:FC<Props> = ({filled_test_id,question, setQuestionAnswer})
     if (question) {
         return (
             <div className="mt-3">
-                <h1>{question.question}</h1>
+                <h1>{question.title}</h1>
                 <p>{question.task}?</p>
                 <p>{question.help}</p>
                 <div className="row">

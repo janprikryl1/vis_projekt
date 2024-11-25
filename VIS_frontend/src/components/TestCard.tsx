@@ -19,7 +19,7 @@ export const TestCard:FC<Props> = ({test}) => {
                 <Card.Body>
                     <Card.Title><Link to={`${user?.user_type === "Pupil" ? `/test` : '/new_test'}/${test.test_id}`} className="underline-none">{"title" in test ? test.title : test.test_title}</Link></Card.Title>
                     <Card.Text>
-                        {"description" in test ? test.description : test.created_at}
+                        {"description" in test && test.description}
                         {"date_time" in test && <p>Datum: {toCzechDateFormat(test.date_time)}</p>}
                     </Card.Text>
                 </Card.Body>

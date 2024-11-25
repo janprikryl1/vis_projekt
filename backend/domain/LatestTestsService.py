@@ -1,12 +1,12 @@
-from data.TestDTO import get_filled_tests_by_user, get_all_tests
-from data.ProfileData import get_user_info_by_token
+from data.FilledTestDTO import get_filled_tests_by_user
+from data.TestDTO import get_all_tests
+from data.ProfileDTO import get_user_info_by_token
 
 
 class LatestTests:
     def __init__(self, auth_header):
         self.error = None
 
-        # Kontrola na přítomnost a platnost tokenu
         if not auth_header or not auth_header.startswith("Bearer "):
             self.error = 'Authorization token not provided'
             return
@@ -33,11 +33,9 @@ class LatestTests:
             return {'error': 'Invalid user type'}
 
     def _get_latest_tests_for_student(self):
-        # Využíváme funkci pro získání vyplněných testů studenta
         filled_tests = get_filled_tests_by_user(self.user_id)
         return {'latest_tests': filled_tests}
 
     def _get_latest_tests_for_teacher(self):
-        # Využíváme funkci pro získání všech testů (filtr by mohl být přidán v TestDTO)
         created_tests = get_all_tests()
-        return {'created_tests': created_tests}
+        return {'latest_tests': created_tests}

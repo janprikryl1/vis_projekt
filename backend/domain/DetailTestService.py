@@ -1,13 +1,7 @@
 from datetime import datetime
 
-from data.ProfileData import get_user_info_by_token
-from data.TestDTO import (
-    get_test_by_id,
-    create_filled_test,
-    get_filled_tests_by_user,
-    get_tests_not_filled_by_user,
-    get_all_tests
-)
+from data.ProfileDTO import get_user_info_by_token
+from data.TestDTO import (get_test_by_id, create_filled_test)
 from data.DBConnection import get_db_connection
 
 
