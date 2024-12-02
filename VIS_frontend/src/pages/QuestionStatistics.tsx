@@ -11,9 +11,7 @@ export const QuestionStatistics: FC = () => {
     const [rawData, setRawData] = useState<{ user: string; solution: string; is_correct: boolean }[]>([]);
     const [chartData, setChartData] = useState<{ category: string; value: number }[]>([]);
 
-    const parseToPieChartData = (
-        data: { user: string; solution: string; is_correct: boolean }[]
-    ) => {
+    const parseToPieChartData = (data: { user: string; solution: string; is_correct: boolean }[]) => {
         const groupedData: Record<string, number> = {};
 
         data.forEach((item) => {

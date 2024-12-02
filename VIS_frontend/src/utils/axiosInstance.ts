@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
     baseURL: backendUrl,
 });
 
-// Add a request interceptor to set the Authorization header dynamically
+// Request interceptor to set the Authorization header dynamically
 axiosInstance.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem("token");

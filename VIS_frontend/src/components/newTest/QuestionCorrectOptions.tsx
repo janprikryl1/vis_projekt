@@ -34,7 +34,7 @@ export const QuestionCorrectOptions: FC = () => {
 
     const handleAddOption = () => {
         const newOption: CorrectSolutionType = {
-            correct_solution_id: uuidv4(), // Generate a unique ID
+            correct_solution_id: uuidv4(),
             correct_solution_text: "",
             case_sensitive: false,
         };

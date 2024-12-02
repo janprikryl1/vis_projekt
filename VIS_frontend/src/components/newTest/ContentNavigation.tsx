@@ -37,7 +37,6 @@ export const ContentNavigation: FC = () => {
             questions: prevState.questions.filter((_, i) => i !== currentQuestionIndex),
         }));
 
-        // Adjust index after deletion
         if (currentQuestionIndex > 0) {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
         } else if (currentQuestionIndex === test.questions.length - 1 && test.questions.length > 1) {
