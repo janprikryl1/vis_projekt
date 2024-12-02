@@ -22,12 +22,13 @@ class Register:
         } if user_id else {'status': 'error', 'message': 'Registration failed'}
 
     def email_exists(self, email):
-        return ProfileDTO.get(email) > 0
+        return ProfileDTO.email_exists(email) > 0
 
     def create_user(self, name, surname, email, password, user_type='P'):
         encrypted_password = sha256(password.encode()).hexdigest()
         user_id = ProfileDTO.create(name, surname, email, encrypted_password, user_type)
-
+        print(user_id)
         token = os.urandom(32).hex()
-        TokenDTO.create(token)
+        TokenDTO.create(user_id, token)
+        print(token)
         return user_id, token

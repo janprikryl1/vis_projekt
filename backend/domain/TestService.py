@@ -1,12 +1,7 @@
 from data.FilledQuestionDTO import FilledQuestionDTO
 from data.FilledTestDTO import get_filled_tests_by_user, get_tests_not_filled_by_user, create_filled_test
-from data.TestDTO import (
-    create_test,
-    update_test,
-    get_all_tests,
-)
-from data.QuestionDTO import save_question, update_question, delete_outdated_questions, get_question_exists, \
-    get_test_question_ids
+from data.TestDTO import (create_test, update_test, get_all_tests)
+from data.QuestionDTO import save_question, update_question, delete_outdated_questions, get_question_exists, get_test_question_ids
 from data.CorrectSolutionDTO import (
     save_correct_solution,
     update_correct_solution,

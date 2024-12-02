@@ -1,13 +1,9 @@
-from hashlib import sha256
 from data.DBConnection import get_db_connection
 
 
 class LoginDTO:
     @staticmethod
     def get_user_by_credentials(email, password):  # Retrieve user data along with their token using email and password.
-        # Encrypt the password
-        encrypted_password = sha256(password.encode()).hexdigest()
-
         conn = get_db_connection()
         cursor = conn.cursor()
 
@@ -16,7 +12,7 @@ class LoginDTO:
             FROM Profile
             LEFT JOIN Tokens ON Tokens.user_id = Profile.user_id
             WHERE Profile.email = ? AND Profile.password = ?
-        """, (email, encrypted_password))
+        """, (email, password))
 
         user_data = cursor.fetchone()
         conn.close()

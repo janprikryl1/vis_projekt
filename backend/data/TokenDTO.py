@@ -21,6 +21,7 @@ class TokenDTO:
                     INSERT INTO Tokens (user_id, token)
                     VALUES (?, ?)
                 """, (user_id, token))
+        conn.commit()
         conn.close()
         return cursor.lastrowid
 

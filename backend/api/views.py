@@ -7,7 +7,7 @@ from domain.DetailTestService import TestDetailService
 from domain.CheckAuthenticated import CheckAuthenticated
 from domain.FilledQuestionStatisticsService import FilledQuestionStatisticsService
 from domain.LatestTestsService import LatestTests
-from domain.LoginService import LoginDTO
+from domain.LoginService import LoginDTO, LoginService
 from domain.RegisterService import Register
 from domain.TablesService import Tables
 from domain.TestStatisticsService import TestStatisticsService
@@ -46,9 +46,11 @@ class LoginView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
 
-        login_service = LoginDTO()
+        login_service = LoginService()
         result = login_service.login_user(email, password)
-
+        print(result)
+        if not result:
+            return Response({'error': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
         return Response(result, status=status.HTTP_200_OK)
 
 

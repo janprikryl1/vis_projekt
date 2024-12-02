@@ -19,7 +19,9 @@ def login_user(email, password):
     conn.close()
 
     if result:
-        return result[0], result[1], result[2], result[3], "Pupil" if result[4] == "P" else "Teacher" if result[4] == "T" else "Admin", result[5]
+        return result[0], result[1], result[2], result[3], "Pupil" if result[4] == "P" else "Teacher" if result[
+                                                                                                             4] == "T" else "Admin", \
+        result[5]
     return None
 
 
@@ -38,7 +40,8 @@ def is_valid_token(token):
     conn.close()
 
     if result:
-        return result[0], result[1], result[2], result[3], "Pupil" if result[4] == "P" else "Teacher" if result[4] == "T" else "Admin"
+        return result[0], result[1], result[2], result[3], "Pupil" if result[4] == "P" else "Teacher" if result[
+                                                                                                             4] == "T" else "Admin"
     return None
 
 
@@ -62,3 +65,31 @@ def get_user_info_by_token(token):
     return None
 
 
+def email_exists(email):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT COUNT(*) FROM Profile WHERE email = ?
+    """, (email,))
+
+    result = cursor.fetchone()
+    conn.close()
+
+    return result[0]
+
+
+def create(name, surname, email, password, user_type):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO Profile (name, surname, email, password, user_type)
+        VALUES (?, ?, ?, ?, ?)
+    """, (name, surname, email, password, user_type))
+
+    user_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+
+    return user_id

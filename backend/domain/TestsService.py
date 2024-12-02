@@ -1,8 +1,5 @@
 from data.FilledTestDTO import get_filled_tests_by_user, get_tests_not_filled_by_user
-from data.TestDTO import (
-    create_test, update_test, get_test_by_id, delete_test, get_all_tests
-)
-from data.ProfileDTO import get_user_info_by_token
+from data.TestDTO import (create_test, update_test, get_test_by_id, delete_test, get_all_tests)
 from domain.BaseService import BaseService
 
 
